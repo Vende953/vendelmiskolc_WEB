@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendel-Átlagszámláló</title>
+    <link rel="stylesheet" href="style_atlagsz.css"> <!-- A CSS fájl hozzáadása -->
+</head>
+<body>
+
+    <!-- Header/Navbar -->
+    <header>
+        <img src="WEB.png" alt="WEB logo" class="logo">
+        <nav class="navbar">
+            <a href="index.html">Főoldal</a>
+        </nav>
+    </header>
+
+    <h1>Iskolai Átlagszámoló</h1>
+    <p>Írd be az osztályzatokat (egyesével, vesszővel elválasztva):</p>
+
+    <input type="text" id="grades" placeholder="Például: 5, 4, 3, 5, 2">
+    <br>
+    <button onclick="calculateAverage()">Átlag számítása</button>
+
+    <div id="result" class="result"></div>
+
+    <footer>
+        <p>© 2025 Vendel C&O- Minden jog fenntartva</p>
+    </footer>
+
+    <script>
+        function calculateAverage() {
+            const input = document.getElementById('grades').value;
+            const grades = input.split(',').map(grade => parseFloat(grade.trim()));
+
+            if (grades.some(isNaN)) {
+                document.getElementById('result').textContent = 'Kérlek, csak számokat adj meg!';
+                return;
+            }
+
+            const sum = grades.reduce((acc, grade) => acc + grade, 0);
+            const average = sum / grades.length;
+
+            document.getElementById('result').textContent = `Az átlagod: ${average.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
